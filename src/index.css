@@ -1,13 +1,35 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
+}
+
+/* CSS */
+.pagination__link {
+    cursor: pointer;
+    color: #000;
+    background-color: #EDAA2D;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin: 0 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.pagination__link:hover {
+    background-color: #D29100;
+}
+
+.pagination__link--disabled {
+    cursor: not-allowed;
+    color: #aaa;
+    background-color: #ddd;
 }

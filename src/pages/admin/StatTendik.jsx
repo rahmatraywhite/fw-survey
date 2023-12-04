@@ -1,44 +1,81 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import Pagination from '@mui/material/Pagination';
+
+const fetchData = async () => {
+    const response = await axios.get('https://mocki.io/v1/300fe87a-c1a2-4db8-9c96-e132da4f42d7');
+    return response;
+};
 
 const StatTendik = () => {
-    const laporanData = [
-        { email: 'dimaskuncoro@gmail.com', status: 'Tendik', department: 'Bisnis dan hospitality', tanggal: '06 Agustus 2023' },
-        { email: 'argyaWira@gmail.com', status: 'Tendik', department: 'Industri kreatif dan digital', tanggal: '06 Agustus 2023' },
-        { email: 'muhammadNaufalSaiful@gmail.com', status: 'Tendik', department: 'Bisnis dan hospitality', tanggal: '06 Agustus 2023' },
-        { email: 'rakaFredaSandimeru@gmail.com', status: 'Tendik', department: 'Bisnis dan hospitality', tanggal: '06 Agustus 2023' },
-        { email: 'akhmadDicky@gmail.com', status: 'Tendik', department: 'Industri kreatif dan digital', tanggal: '06 Agustus 2023' },
-        { email: 'tegarhendrawan@gmail.com', status: 'Tendik', department: 'Bisnis dan hospitality', tanggal: '06 Agustus 2023' },
-        { email: 'ferdianPaleka@gmail.com', status: 'Tendik', department: 'Industri kreatif dan digital', tanggal: '06 Agustus 2023' },
-        { email: 'Imanuelamandio@gmail.com', status: 'Tendik', department: 'Industri kreatif dan digital', tanggal: '06 Agustus 2023' },
-    ];
+    const [data, setData] = useState([]);
+    const [startIndex, setStartIndex] = useState(0);
+    const [endIndex, setEndIndex] = useState(10);
+    const [totalPages, setTotalPages] = useState(1);
+
+    useEffect(() => {
+        const fetchDataAsync = async () => {
+            const result = await fetchData();
+            setData(result.data);
+
+            const totalItems = result.data.length;
+            const perPage = 10;
+            const calculatedTotalPages = Math.ceil(totalItems / perPage);
+            setTotalPages(calculatedTotalPages);
+        };
+
+        fetchDataAsync();
+    }, []);
+
+    const handleChangePage = (event, newPage) => {
+        const perPage = 10;
+        const newStartIndex = (newPage - 1) * perPage;
+        const newEndIndex = newStartIndex + perPage - 1;
+
+        setStartIndex(newStartIndex);
+        setEndIndex(newEndIndex);
+    };
 
     return (
-        <div className='flex flex-col justify-center'>
-            <div className='flex flex-col'>
-                <h1 className='text-[#000] text-[32px] font-bold mb-6'>Laporan Masuk</h1>
-                <table className='w-full text-left text-[#000000]'>
-                    <thead>
-                        <tr className='border-b-2 border-[#000]'>
-                            <th className='py-2'>Email</th>
-                            <th className='py-2 text-center'>Status</th>
-                            <th className='py-2 text-center'>Department</th>
-                            <th className='py-2 text-center'>Tanggal</th>
-                        </tr>
-                    </thead>
-                    <tbody className='font-medium'>
-                        {laporanData.map((laporan, index) => (
-                            <tr key={index}>
-                                <td className='py-3'>{laporan.email}</td>
-                                <td className='py-3 text-center'>{laporan.status}</td>
-                                <td className='py-3 text-center'>{laporan.department}</td>
-                                <td className='py-3 text-center'>{laporan.tanggal}</td>
-                            </tr>
+        <div className='flex flex-col items-start h-full'>
+            <h1 className="text-2xl text-left font-bold">Laporan Masuk</h1>
+            <TableContainer component={Paper} className="my-4">
+                <Table>
+                    <TableHead>
+                        <TableRow className='bg-gray-200' style={{ position: 'sticky', top: 0, zIndex: 1 }}>
+                            <TableCell>Email</TableCell>
+                            <TableCell>Status</TableCell>
+                            <TableCell>Department</TableCell>
+                            <TableCell>Tanggal</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {data.slice(startIndex, endIndex + 1).map((row) => (
+                            <TableRow key={row.id}>
+                                <TableCell>{row.email}</TableCell>
+                                <TableCell>{row.status}</TableCell>
+                                <TableCell>{row.department}</TableCell>
+                                <TableCell>{row.tanggal}</TableCell>
+                            </TableRow>
                         ))}
-                    </tbody>
-                </table>
-            </div>
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <Pagination
+                count={totalPages}
+                onChange={handleChangePage}
+                shape="rounded"
+                className="my-4"
+            />
         </div>
-    )
-}
+    );
+};
 
-export default StatTendik
+export default StatTendik;

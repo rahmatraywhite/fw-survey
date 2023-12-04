@@ -11,6 +11,9 @@ import StatDosen from './pages/admin/StatDosen'
 import StatistikPengguna from './pages/admin/StatistikPengguna'
 import StatMahasiwa from './pages/admin/StatMahasiwa'
 import StatTendik from './pages/admin/StatTendik'
+import Pertanyaan from './pages/admin/Pertanyaan'
+import Penilaian from './pages/admin/Penilaian'
+import Dashboard from './pages/admin/Dashboard'
 const App = () => {
 
   const router = createBrowserRouter([
@@ -44,6 +47,9 @@ const App = () => {
       children: [
         {
           index: true,
+          element: <Dashboard />,
+        },
+        {
           path: 'statistik',
           element: <StatistikPengguna />,
         },
@@ -58,6 +64,14 @@ const App = () => {
         {
           path: 'statistik/tendik',
           element: <StatTendik />,
+        },
+        {
+          path: 'pertanyaan',
+          element: <Pertanyaan />,
+        },
+        {
+          path: 'penilaian',
+          element: <Penilaian />,
         }
       ]
     }
