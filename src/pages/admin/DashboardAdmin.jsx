@@ -16,7 +16,7 @@ const DashboardAdmin = () => {
             case 'pertanyaan':
                 return 'Pertanyaan';
             case 'penilaian':
-                return 'Penilaian';
+                return 'Penilaian dan Saran';
             default:
                 return 'Dashboard';
         }

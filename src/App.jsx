@@ -14,6 +14,7 @@ import StatTendik from './pages/admin/StatTendik'
 import Pertanyaan from './pages/admin/Pertanyaan'
 import Penilaian from './pages/admin/Penilaian'
 import Dashboard from './pages/admin/Dashboard'
+import StatistikData from './pages/admin/StatistikData'
 const App = () => {
 
   const router = createBrowserRouter([
@@ -72,6 +73,10 @@ const App = () => {
         {
           path: 'penilaian',
           element: <Penilaian />,
+        },
+        {
+          path: 'statistik-data',
+          element: <StatistikData />,
         }
       ]
     }

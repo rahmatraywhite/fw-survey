@@ -20,7 +20,7 @@ const PageAdmin = () => {
 
   return (
     <main className="bg-[#253A59] min-h-screen flex flex-col items-center justify-center">
-      <div className="mx-auto bg-[#fff] w-[728px] h-[120px] flex flex-col justify-center items-center">
+      <div className="mx-auto bg-[#fff] w-[728px] h-[120px] rounded-md flex flex-col justify-center items-center">
         <img className="w-[321px]" src={Logo} alt="Vokasi UB" />
       </div>
       <form

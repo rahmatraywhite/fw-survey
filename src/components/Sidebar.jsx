@@ -12,9 +12,9 @@ const Sidebar = () => {
         <div className="flex ">
             <div className="flex flex-col h-screen p-3 bg-[#253A59] shadow w-64">
                 <div className="space-y-3 flex-1">
-                    <div className="flex bg-[#E1E1E1] py-2 px-4 rounded-md items-center border-[3px] border-[#000]">
+                    <Link to='/dashboard' className="flex bg-[#E1E1E1] py-2 px-4 rounded-md items-center border-[3px] border-[#000]">
                         <img src={Logo} alt="Vokasi Universitas Brawijaya" />
-                    </div>
+                    </Link>
                     <div className='p-2 text-white'>
                         <h1 className='uppercase text-3xl font-bold'>Menu</h1>
                         <p className='text-lg -mt-2 tracking-wide'>Menu Aplikasi</p>
@@ -68,10 +68,12 @@ const Sidebar = () => {
                     </ul>
                 </div>
                 <div>
+                    <Link to='/admin'>
                     <button className="flex items-center bg-[#EDAA2D] justify-between w-full hover:bg-yellow-600 text-white font-bold p-2 space-x-3 rounded-md">
                         <span>Logout</span>
                         <CiLogout className='text-xl' />
                     </button>
+                    </Link>
                 </div>
             </div>
         </div>

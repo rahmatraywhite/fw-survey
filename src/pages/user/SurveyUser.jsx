@@ -25,16 +25,16 @@ const SurveyUser = () => {
     };
 
     return (
-        <main className="h-screen flex flex-col">
+        <main className="flex flex-col">
             <Navbar />
-            <div className="p-5 bg-[#D5D5D5] mx-auto my-auto rounded-[10px] w-[1000px]">
-                <h1 className="text-5xl text-center text-[#000] font-bold mb-4">SURVEY KEPUASAN</h1>
-                <p className="text-[20px] text-center font-bold mb-6">
+            <div className="p-8 bg-[#D5D5D5] mx-auto my-24  rounded-[10px] w-[800px]">
+                <h1 className="text-3xl text-center text-[#000] font-bold mb-[51px]">SURVEY KEPUASAN</h1>
+                <p className="text-lg text-center font-medium mb-[75px]">
                     Isilah survey kepuasan dibawah ini terhadap layanan dan fasilitas yang ada di Fakultas Vokasi Universitas Brawijaya.
                 </p>
                 <form onSubmit={handleSubmit} className="mb-6">
-                    <div className="mb-4">
-                        <label className="block text-lg font-bold text-[#000] ">
+                    <div className="mb-6">
+                        <label className="block text-base font-semibold text-[#000]">
                             Kemampuan menggunakan beragam teknologi komunikasi dan memanfaatkan media dan teknologi pembelajaran
                         </label>
                         <div className="flex items-center mt-2">
@@ -47,7 +47,7 @@ const SurveyUser = () => {
                                         onChange={() => setJawabanPertanyaan1(value)}
                                         className="hidden"
                                     />
-                                    <div className={`w-[60px] text-lg font-bold    h-[60px] border rounded-full border-[#EDAA2D] flex items-center justify-center ${jawabanPertanyaan1 === value ? 'bg-[#EDAA2D] text-white' : ''}`}>
+                                    <div className={`w-[55px] text-lg font-bold h-[55px] border rounded-full border-[#EDAA2D] flex items-center justify-center ${jawabanPertanyaan1 === value ? 'bg-[#EDAA2D] text-white' : ''}`}>
                                         {value}
                                     </div>
                                 </label>
@@ -55,8 +55,8 @@ const SurveyUser = () => {
                         </div>
                     </div>
 
-                    <div className="mb-4">
-                        <label className="block text-lg font-bold text-[#000] ">
+                    <div className="mb-6">
+                    <label className="block text-base font-semibold text-[#000]">
                             Penggunaan hasil-hasil penelitian untuk meningkatkan kualitas perkuliahan
                         </label>
                         <div className="flex items-center mt-2">
@@ -69,7 +69,7 @@ const SurveyUser = () => {
                                         onChange={() => setJawabanPertanyaan2(value)}
                                         className="hidden"
                                     />
-                                    <div className={`w-[60px] h-[60px] text-lg font-bold border rounded-full border-[#EDAA2D] flex items-center justify-center ${jawabanPertanyaan2 === value ? 'bg-[#EDAA2D] text-white' : ''}`}>
+                                    <div className={`w-[55px] h-[55px] text-lg font-bold border rounded-full border-[#EDAA2D] flex items-center justify-center ${jawabanPertanyaan2 === value ? 'bg-[#EDAA2D] text-white' : ''}`}>
                                         {value}
                                     </div>
                                 </label>
@@ -77,8 +77,8 @@ const SurveyUser = () => {
                         </div>
                     </div>
 
-                    <div className="mb-4">
-                        <label className="block text-lg font-bold text-[#000] ">
+                    <div className="mb-6">
+                    <label className="block text-base font-semibold text-[#000]">
                             Kejelasan penyampaian materi dan jawaban terhadap pertanyaan di kelas
                         </label>
                         <div className="flex items-center mt-2">
@@ -91,7 +91,7 @@ const SurveyUser = () => {
                                         onChange={() => setJawabanPertanyaan3(value)}
                                         className="hidden"
                                     />
-                                    <div className={`w-[60px] h-[60px] text-lg font-bold border rounded-full border-[#EDAA2D] flex items-center justify-center ${jawabanPertanyaan3 === value ? 'bg-[#EDAA2D] text-white' : ''}`}>
+                                    <div className={`w-[55px] h-[55px] text-lg font-bold border rounded-full border-[#EDAA2D] flex items-center justify-center ${jawabanPertanyaan3 === value ? 'bg-[#EDAA2D] text-white' : ''}`}>
                                         {value}
                                     </div>
                                 </label>
@@ -99,8 +99,8 @@ const SurveyUser = () => {
                         </div>
                     </div>
 
-                    <div className="mb-4">
-                        <label htmlFor="kritikSaran" className="block text-lg font-bold text-[#000]">
+                    <div className="mb-6">
+                        <label htmlFor="kritikSaran" className="block text-base font-semibold text-[#000]">
                             Kritik dan Saran
                         </label>
                         <textarea
