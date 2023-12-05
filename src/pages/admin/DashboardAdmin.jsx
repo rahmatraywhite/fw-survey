@@ -9,7 +9,6 @@ const DashboardAdmin = () => {
     const getTitle = () => {
         const lastSlashIndex = location.pathname.lastIndexOf('/');
         const pageName = location.pathname.substring(lastSlashIndex + 1);
-
         switch (pageName) {
             case 'statistik':
                 return 'Statistik Pengguna';
@@ -17,6 +16,8 @@ const DashboardAdmin = () => {
                 return 'Pertanyaan';
             case 'penilaian':
                 return 'Penilaian dan Saran';
+            case 'statistik-data':
+                return 'Hasil Statistik Data';
             default:
                 return 'Dashboard';
         }

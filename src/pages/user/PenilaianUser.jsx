@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar'
 import { FaStar } from "react-icons/fa";
 
@@ -8,11 +8,26 @@ const PenilaianUser = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        localStorage.setItem('rating', rating);
+        localStorage.setItem('review', review);
         console.log({
             rating,
             review,
         });
     };
+
+    useEffect(() => {
+        const storedRating = localStorage.getItem('rating');
+        const storedReview = localStorage.getItem('review');
+        if (storedRating) {
+            setRating(parseInt(storedRating));
+        }
+        if (storedReview) {
+            setReview(storedReview);
+        }
+    }, []);
+
+
     return (
         <main className="h-screen flex flex-col">
             <Navbar />
@@ -46,7 +61,6 @@ const PenilaianUser = () => {
                             className="block rounded-lg w-full mt-1"
                         ></textarea>
                     </div>
-
                     <button
                         type="submit"
                         className="bg-[#EDAA2D] w-[80%] mt-5 mb-10 mx-auto uppercase text-[#000] font-medium text-2xl py-2 px-6 rounded-md hover:bg-[#D29100] focus:outline-none focus:shadow-outline"

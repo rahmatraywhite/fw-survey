@@ -28,7 +28,6 @@ const data = {
     {
       label: 'Mahasiswa',
       data: [79, 79, 79, 79, 79],
-    //   data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
       backgroundColor: '#A9A9A9',
     },
     {

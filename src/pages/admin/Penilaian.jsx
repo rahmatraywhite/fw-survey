@@ -7,31 +7,37 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const data = {
-    labels: ['1', '2', '3' , '4', '5'],
-    datasets: [
-      {
-        label: 'Rating',
-        data: [3, 2, 1, 4, 5],
-        backgroundColor: [
-          '#A9A9A9',
-          '#FF5B22',
-          '#0766AD',
-          '#0766AD',
-          '#0766AD',
-        ],
-        borderColor: [
-          '#A9A9A9',
-          '#FF5B22',
-          '#0766AD',
-          '#0766AD',
-          '#0766AD',
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
+  labels: ['  1', '2', '3', '4', '5'],
+  datasets: [
+    {
+      label: 'Rating',
+      data: [1, 1, 1, , 2],
+      backgroundColor: [
+        '#5FBDFF',
+        '#FF5B22',
+        '#B6BBC4',
+        '#F4F27E',
+        '#B31312',
+      ],
+      borderColor: [
+        '#5FBDFF',
+        '#FF5B22',
+        '#B6BBC4',
+        '#F4F27E',
+        '#B31312',
+      ],
+      widtgh: 1,
+      borderWidth: 1,
+    },
+  ],
+};
 const Penilaian = () => {
   const dataPenilaianSaran = [
+    {
+      nama: 'Vera',
+      penilaian: 5,
+      saran: 'Aplikasi survey kepuasan ini cukup mudah digunakan. Aplikasi survey kepuasan ini cukup mudah digunakan.',
+    },
     {
       nama: 'Dimas Rifqi',
       penilaian: 3,
@@ -59,21 +65,21 @@ const Penilaian = () => {
     },
   ];
   return (
-   <div className='flex'>
-     <div className="flex flex-col space-y-4">
-      {dataPenilaianSaran.map((item, index) => (
-        <CardPenilaian
-          key={index}
-          nama={item.nama}
-          penilaian={item.penilaian}
-          saran={item.saran}
-        />
-      ))}
+    <div className='flex h-full overflow-auto'>
+      <div className="flex flex-col space-y-4">
+        {dataPenilaianSaran.map((item, index) => (
+          <CardPenilaian
+            key={index}
+            nama={item.nama}
+            penilaian={item.penilaian}
+            saran={item.saran}
+          />
+        ))}
+      </div>
+      <div>
+        <Doughnut data={data} />
+      </div>
     </div>
-    <div>
-    <Doughnut data={data} />
-    </div>
-   </div>
   );
 };
 

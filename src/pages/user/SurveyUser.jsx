@@ -56,7 +56,7 @@ const SurveyUser = () => {
                     </div>
 
                     <div className="mb-6">
-                    <label className="block text-base font-semibold text-[#000]">
+                        <label className="block text-base font-semibold text-[#000]">
                             Penggunaan hasil-hasil penelitian untuk meningkatkan kualitas perkuliahan
                         </label>
                         <div className="flex items-center mt-2">
@@ -78,7 +78,7 @@ const SurveyUser = () => {
                     </div>
 
                     <div className="mb-6">
-                    <label className="block text-base font-semibold text-[#000]">
+                        <label className="block text-base font-semibold text-[#000]">
                             Kejelasan penyampaian materi dan jawaban terhadap pertanyaan di kelas
                         </label>
                         <div className="flex items-center mt-2">

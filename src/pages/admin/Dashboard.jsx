@@ -8,52 +8,52 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const data = {
-  labels: ['Mahasiswa', 'Dosen', 'Tendik'],
-  datasets: [
-    {
-      label: 'Survey',
-      data: [79, 20, 35],
-      backgroundColor: [
-        '#A9A9A9',
-        '#FF5B22',
-        '#0766AD',
-      ],
-      borderColor: [
-        '#A9A9A9',
-        '#FF5B22',
-        '#0766AD',
-      ],
-      borderWidth: 1,
-    },
-  ],
+    labels: ['Mahasiswa', 'Dosen', 'Tendik'],
+    datasets: [
+        {
+            label: 'Survey',
+            data: [79, 20, 35],
+            backgroundColor: [
+                '#A9A9A9',
+                '#FF5B22',
+                '#0766AD',
+            ],
+            borderColor: [
+                '#A9A9A9',
+                '#FF5B22',
+                '#0766AD',
+            ],
+            borderWidth: 1,
+        },
+    ],
 };
 
 const Dashboard = () => {
     return (
         <div className='max-w-7xl'>
-          <h1 className="text-2xl font-bold">Overview Pengisi Survey</h1>
-          <div className="grid grid-cols-3 mt-4 gap-4">
-            <CardUser name="Mahasiswa" length={79} />
-            <CardUser name="Dosen" length={20} />
-            <CardUser name="Tendik" length={35} />
-          </div>
-          <h1 className="text-2xl font-bold my-2">Statistic</h1>
-          <div className="flex justify-center gap-14">
-            <div>
-              <div className="w-[300px] h-[295px]">
-                <p className="text-lg font-medium ">Civitas Academic</p>
-                <Doughnut data={data} />
-              </div>
+            <h1 className="text-2xl font-bold">Overview Pengisi Survey</h1>
+            <div className="grid grid-cols-3 mt-4 gap-4">
+                <CardUser name="Mahasiswa" length={79} />
+                <CardUser name="Dosen" length={20} />
+                <CardUser name="Tendik" length={35} />
             </div>
-            <div className="">
-              <p className="text-lg font-medium ">Traffic</p>
-              <div className="w-[600px]">
-                <BarChart />
-              </div>
+            <h1 className="text-2xl font-bold my-2">Statistic</h1>
+            <div className="flex justify-start gap-14">
+                <div>
+                    <div className="w-[300px] h-[295px]">
+                        <p className="text-lg font-medium ">Civitas Academic</p>
+                        <Doughnut data={data} />
+                    </div>
+                </div>
+                <div className="">
+                    <p className="text-lg font-medium ">Traffic</p>
+                    <div className="w-[600px]">
+                        <BarChart />
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      );
+    );
 };
 
 export default Dashboard;
