@@ -65,21 +65,22 @@ const Penilaian = () => {
     },
   ];
   return (
-    <div className='flex h-full overflow-auto'>
-      <div className="flex flex-col space-y-4">
-        {dataPenilaianSaran.map((item, index) => (
-          <CardPenilaian
-            key={index}
-            nama={item.nama}
-            penilaian={item.penilaian}
-            saran={item.saran}
-          />
-        ))}
-      </div>
-      <div>
-        <Doughnut data={data} />
-      </div>
+    <div className="flex flex-column h-full">
+    <div className="flex flex-col-reverse overflow-auto space-y-4 flex-1">
+      {dataPenilaianSaran.map((item, index) => (
+        <CardPenilaian
+          key={index}
+          nama={item.nama}
+          penilaian={item.penilaian}
+          saran={item.saran}
+        />
+      ))}
     </div>
+    <div className="hidden md:flex">
+      <Doughnut data={data} />
+    </div>
+  </div>
+  
   );
 };
 

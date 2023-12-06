@@ -27,10 +27,10 @@ const DashboardAdmin = () => {
         <div className="flex h-screen overflow-hidden">
             <Sidebar />
             <div className="flex flex-col flex-grow">
-                <nav className='bg-[#253A59] items-center flex border-[#EDAA2D] border-l-4 h-[100px] px-10 shadow-xl fixed w-full'>
+                <nav className='bg-[#253A59] items-center flex border-[#EDAA2D] border-l-4 h-[70px] md:h-[100px] px-10 shadow-xl fixed w-full'>
                     <h1 className="text-white text-2xl uppercase font-bold">{getTitle()}</h1>
                 </nav>
-                <div className="p-8 flex-grow overflow-y-hidden mt-20">
+                <div className="p-2 md:p-8 flex-grow overflow-y-hidden mt-20">
                     <Outlet />
                 </div>
             </div>

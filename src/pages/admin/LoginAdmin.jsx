@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import Logo from '../../assets/logo.svg';
-import { TextField, Button, Checkbox, FormControlLabel } from '@mui/material';
+import {
+  TextField,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  InputAdornment,
+} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { MdAccountCircle, MdLock } from 'react-icons/md';
 
-const PageAdmin = () => {
+const LoginAdmin = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
@@ -20,12 +27,12 @@ const PageAdmin = () => {
 
   return (
     <main className="bg-[#253A59] min-h-screen flex flex-col items-center justify-center">
-      <div className="mx-auto bg-[#fff] w-[728px] h-[120px] rounded-md flex flex-col justify-center items-center">
+      <div className="mx-auto bg-[#fff] w-[350px] p-4 md:w-[728px] h-[120px] flex flex-col rounded-[6px] justify-center items-center">
         <img className="w-[321px]" src={Logo} alt="Vokasi UB" />
       </div>
       <form
         onSubmit={handleSubmit}
-        className="bg-white flex space-y-4 flex-col justify-center shadow-md mt-5 w-[728px] rounded px-8 py-10"
+        className="bg-white flex space-y-4 flex-col justify-center shadow-md mt-5 w-[350px] md:w-[728px] rounded px-8 py-10"
       >
         <h1 className="text-center text-[30px] uppercase font-bold">Login</h1>
         <TextField
@@ -36,6 +43,13 @@ const PageAdmin = () => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           className="mb-4"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <MdAccountCircle />
+              </InputAdornment>
+            ),
+          }}
         />
         <TextField
           label="Password"
@@ -46,6 +60,13 @@ const PageAdmin = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="mb-4"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <MdLock />
+              </InputAdornment>
+            ),
+          }}
         />
         <FormControlLabel
           control={
@@ -60,17 +81,20 @@ const PageAdmin = () => {
           className="mb-4"
         />
         <Button
-          style={{ backgroundColor: '#EDAA2D', '&:hover': { backgroundColor: '#D29100' }, color: '#000' }}
+          style={{
+            backgroundColor: '#EDAA2D',
+            '&:hover': { backgroundColor: '#D29100' },
+            color: '#000',
+          }}
           fullWidth
           size="large"
           type="submit"
         >
           Submit
         </Button>
-
       </form>
     </main>
   );
 };
 
-export default PageAdmin;
+export default LoginAdmin;

@@ -31,9 +31,9 @@ const PenilaianUser = () => {
     return (
         <main className="h-screen flex flex-col">
             <Navbar />
-            <div className="p-5 bg-[#D5D5D5] mx-auto rounded-[10px] my-auto w-[1000px]">
-                <h1 className="text-[40px] uppercase text-center text-[#000] font-bold mb-4">Penilaian dan Saran</h1>
-                <form onSubmit={handleSubmit} className="mb-6 flex px-[104px] flex-col">
+            <div className="p-5 bg-[#D5D5D5] mx-auto rounded-[10px] my-auto w-full md:w-[1000px]">
+                <h1 className="md:text-[40px] text-[28px] uppercase text-center text-[#000] font-bold mb-4">Penilaian dan Saran</h1>
+                <form onSubmit={handleSubmit} className="mb-6 flex md:px-[104px] flex-col">
                     <div className="mb-4 flex items-center justify-center">
                         {[1, 2, 3, 4, 5].map((value) => (
                             <label key={value} className="mr-2 cursor-pointer">
@@ -63,7 +63,7 @@ const PenilaianUser = () => {
                     </div>
                     <button
                         type="submit"
-                        className="bg-[#EDAA2D] w-[80%] mt-5 mb-10 mx-auto uppercase text-[#000] font-medium text-2xl py-2 px-6 rounded-md hover:bg-[#D29100] focus:outline-none focus:shadow-outline"
+                        className="bg-[#EDAA2D] w-full md:w-[80%] mt-5 mb-10 mx-auto uppercase text-[#000] font-medium text-2xl py-2 px-6 rounded-md hover:bg-[#D29100] focus:outline-none focus:shadow-outline"
                     >
                         Submit
                     </button>

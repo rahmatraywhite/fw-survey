@@ -1,7 +1,5 @@
 import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import PageUser from './pages/user/PageUser'
-import PageAdmin from './pages/admin/PageAdmin'
 import PageSuperAdmin from './pages/superadmin/PageSuperAdmin'
 import SelectUser from './pages/user/SelectUser'
 import SurveyUser from './pages/user/SurveyUser'
@@ -15,12 +13,14 @@ import Pertanyaan from './pages/admin/Pertanyaan'
 import Penilaian from './pages/admin/Penilaian'
 import Dashboard from './pages/admin/Dashboard'
 import StatistikData from './pages/admin/StatistikData'
+import LoginUser from './pages/user/LoginUser'
+import LoginAdmin from './pages/admin/LoginAdmin'
 const App = () => {
 
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <PageUser />,
+      element: <LoginUser />,
     },
     {
       path: '/select-user',
@@ -36,7 +36,7 @@ const App = () => {
     },
     {
       path: '/admin',
-      element: <PageAdmin />
+      element: <LoginAdmin />
     },
     {
       path: '/super-admin',

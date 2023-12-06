@@ -46,7 +46,7 @@ const StatMahasiswa = () => {
     return (
         <div className='flex flex-col items-start h-full'>
             <h1 className="text-2xl text-left font-bold">Laporan Masuk</h1>
-            <TableContainer component={Paper} className="my-4">
+            <TableContainer sx={{ width: 'auto' }} component={Paper} className="my-4">
                 <Table>
                     <TableHead>
                         <TableRow className='bg-gray-200' style={{ position: 'sticky', top: 0, zIndex: 1 }}>

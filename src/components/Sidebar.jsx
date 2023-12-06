@@ -10,14 +10,14 @@ import { CiLogout } from "react-icons/ci";
 const Sidebar = () => {
     return (
         <div className="flex ">
-            <div className="flex flex-col h-screen p-3 bg-[#253A59] shadow w-64">
+            <div className="flex flex-col h-screen p-1 md:p-3 bg-[#253A59] shadow w-[80px] md:w-64">
                 <div className="space-y-3 flex-1">
-                    <Link to='/dashboard' className="flex bg-[#E1E1E1] py-2 px-4 rounded-md items-center border-[3px] border-[#000]">
+                    <Link to='/dashboard' className="flex bg-[#E1E1E1] mt-4 py-2 px-4 rounded-md items-center border-[3px] border-[#000]">
                         <img src={Logo} alt="Vokasi Universitas Brawijaya" />
                     </Link>
                     <div className='p-2 text-white'>
-                        <h1 className='uppercase text-3xl font-bold'>Menu</h1>
-                        <p className='text-lg -mt-2 tracking-wide'>Menu Aplikasi</p>
+                        <h1 className='uppercase text-xl md:text-3xl font-bold'>Menu</h1>
+                        <p className='text-base md:text-lg -mt-2 tracking-wide'>Menu Aplikasi</p>
                         <div className='border-b-4 rounded-md border-[#EDAA2D]'></div>
                     </div>
                     <ul className="py-4 space-y-6 text-lg text-white font-normal flex-1">
@@ -28,8 +28,8 @@ const Sidebar = () => {
                                     }`
                                 }
                             >
-                                <PiUserListBold className='text-2xl' />
-                                <span>Statistik Pengguna</span>
+                                <PiUserListBold className='text-4xl mx-auto md:mx-0 md:text-2xl' />
+                                <span className='hidden md:inline'>Statistik Pengguna</span>
                             </NavLink>
                         </li>
                         <li className="rounded-md hover:bg-[#EDAA2D]">
@@ -39,8 +39,8 @@ const Sidebar = () => {
                                     }`
                                 }
                             >
-                                <MdQuestionAnswer className='text-2xl' />
-                                <span>Pertanyaan</span>
+                                <MdQuestionAnswer className='text-4xl mx-auto md:mx-0 md:text-2xl' />
+                                <span className='hidden md:inline'>Pertanyaan</span>
                             </NavLink>
                         </li>
                         <li className="rounded-md hover:bg-[#EDAA2D]">
@@ -50,8 +50,8 @@ const Sidebar = () => {
                                     }`
                                 }
                             >
-                                <TbReport className='text-2xl' />
-                                <span>Penilaian Dan Saran</span>
+                                <TbReport className='text-4xl mx-auto md:mx-0 md:text-2xl' />
+                                <span className='hidden md:inline'>Penilaian Dan Saran</span>
                             </NavLink>
                         </li>
                         <li className="rounded-md hover:bg-[#EDAA2D]">
@@ -61,8 +61,8 @@ const Sidebar = () => {
                                     }`
                                 }
                             >
-                                <FaChartBar className='text-2xl' />
-                                <span>Hasil Statistik Data</span>
+                                <FaChartBar className='text-4xl mx-auto md:mx-0 md:text-2xl' />
+                                <span className='hidden md:inline'>Hasil Statistik Data</span>
                             </NavLink>
                         </li>
                     </ul>

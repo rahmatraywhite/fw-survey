@@ -27,19 +27,19 @@ const SurveyUser = () => {
     return (
         <main className="flex flex-col">
             <Navbar />
-            <div className="p-8 bg-[#D5D5D5] mx-auto my-24  rounded-[10px] w-[800px]">
-                <h1 className="text-3xl text-center text-[#000] font-bold mb-[51px]">SURVEY KEPUASAN</h1>
-                <p className="text-lg text-center font-medium mb-[75px]">
+            <div className="p-8 bg-[#D5D5D5] mx-auto my-24  rounded-[10px] w-[350px] md:w-[800px]">
+                <h1 className="md:text-3xl text-2xl text-center text-[#000] font-bold mb-[51px]">SURVEY KEPUASAN</h1>
+                <p className="text-lg md:text-lg text-center font-medium mb-[75px]">
                     Isilah survey kepuasan dibawah ini terhadap layanan dan fasilitas yang ada di Fakultas Vokasi Universitas Brawijaya.
                 </p>
                 <form onSubmit={handleSubmit} className="mb-6">
                     <div className="mb-6">
-                        <label className="block text-base font-semibold text-[#000]">
+                        <label className="block text-base text-center md:text-left font-semibold text-[#000]">
                             Kemampuan menggunakan beragam teknologi komunikasi dan memanfaatkan media dan teknologi pembelajaran
                         </label>
                         <div className="flex items-center mt-2">
                             {[1, 2, 3, 4, 5].map((value) => (
-                                <label key={value} className={`flex items-center mr-4 cursor-pointer`}>
+                                <label key={value} className={`flex items-center mr-1 md:mr-4 cursor-pointer`}>
                                     <input
                                         type="radio"
                                         value={value}
@@ -56,12 +56,12 @@ const SurveyUser = () => {
                     </div>
 
                     <div className="mb-6">
-                        <label className="block text-base font-semibold text-[#000]">
+                    <label className="block text-base text-center md:text-left font-semibold text-[#000]">
                             Penggunaan hasil-hasil penelitian untuk meningkatkan kualitas perkuliahan
                         </label>
                         <div className="flex items-center mt-2">
                             {[1, 2, 3, 4, 5].map((value) => (
-                                <label key={value} className={`flex items-center mr-4 cursor-pointer`}>
+                                 <label key={value} className={`flex items-center mr-1 md:mr-4 cursor-pointer`}>
                                     <input
                                         type="radio"
                                         value={value}
@@ -78,12 +78,12 @@ const SurveyUser = () => {
                     </div>
 
                     <div className="mb-6">
-                        <label className="block text-base font-semibold text-[#000]">
+                    <label className="block text-base text-center md:text-left font-semibold text-[#000]">
                             Kejelasan penyampaian materi dan jawaban terhadap pertanyaan di kelas
                         </label>
                         <div className="flex items-center mt-2">
                             {[1, 2, 3, 4, 5].map((value) => (
-                                <label key={value} className={`flex items-center mr-4 cursor-pointer`}>
+                                 <label key={value} className={`flex items-center mr-1 md:mr-4 cursor-pointer`}>
                                     <input
                                         type="radio"
                                         value={value}
@@ -115,7 +115,7 @@ const SurveyUser = () => {
 
                     <button
                         type="submit"
-                        className="bg-[#EDAA2D] text-[#000] font-medium text-2xl py-2 px-6 rounded-md hover:bg-[#D29100] focus:outline-none focus:shadow-outline"
+                        className="bg-[#EDAA2D] text-[#000] w-full font-medium text-xl py-2 px-6 rounded-md hover:bg-[#D29100] focus:outline-none focus:shadow-outline"
                     >
                         SUBMIT
                     </button>

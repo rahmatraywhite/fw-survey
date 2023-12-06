@@ -30,15 +30,15 @@ export const data = {
 
 const Dashboard = () => {
     return (
-        <div className='max-w-7xl'>
-            <h1 className="text-2xl font-bold">Overview Pengisi Survey</h1>
-            <div className="grid grid-cols-3 mt-4 gap-4">
+        <div className='max-w-7xl flex flex-col overflow-auto h-screen'>
+            <h1 className="text-2xl md:text-2xl font-bold">Overview Pengisi Survey</h1>
+            <div className="grid md:grid-cols-3 mt-2 gap-4">
                 <CardUser name="Mahasiswa" length={79} />
                 <CardUser name="Dosen" length={20} />
                 <CardUser name="Tendik" length={35} />
             </div>
-            <h1 className="text-2xl font-bold my-2">Statistic</h1>
-            <div className="flex justify-start gap-14">
+            <h1 className="text-2xl font-bold mt-5">Statistic</h1>
+            <div className="flex flex-col md:flex-row justify-start gap-14">
                 <div>
                     <div className="w-[300px] h-[295px]">
                         <p className="text-lg font-medium ">Civitas Academic</p>
