@@ -12,6 +12,12 @@ const DashboardAdmin = () => {
         switch (pageName) {
             case 'statistik':
                 return 'Statistik Pengguna';
+            case 'mahasiswa' :
+                return 'Statistik Mahasiswa';
+            case 'dosen':
+                return 'Statistik Dosen';
+            case 'tendik':
+                return 'Statistik Tendik';
             case 'pertanyaan':
                 return 'Pertanyaan';
             case 'penilaian':

@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import Logo from '../../assets/logo.svg';
-import { MdOutlineEmail } from 'react-icons/md';
-import { FiUsers } from 'react-icons/fi';
+import { MdOutlineEmail, MdLock } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 const LoginUser = () => {
   const [email, setEmail] = useState('');
-  const [gender, setGender] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -40,14 +39,15 @@ const LoginUser = () => {
         />
         <TextField
           className="w-full"
-          label="Jenis Kelamin"
+          label="Password"
           variant="outlined"
           size="large"
-          value={gender}
-          onChange={(e) => setGender(e.target.value)}
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           InputProps={{
             startAdornment: (
-              <FiUsers className="text-[#253A59] mr-4 text-[24px]" />
+              <MdLock className="text-[#253A59] mr-4 text-[24px]" />
             ),
           }}
         />
