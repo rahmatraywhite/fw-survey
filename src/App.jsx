@@ -15,6 +15,7 @@ import Dashboard from './pages/admin/Dashboard'
 import StatistikData from './pages/admin/StatistikData'
 import LoginUser from './pages/user/LoginUser'
 import LoginAdmin from './pages/admin/LoginAdmin'
+import RegisterUser from './pages/Register'
 const App = () => {
 
   const router = createBrowserRouter([
@@ -41,6 +42,10 @@ const App = () => {
     {
       path: '/super-admin',
       element: <PageSuperAdmin />,
+    },
+    {
+      path: '/register',
+      element: <RegisterUser />
     },
     {
       path: '/dashboard',
