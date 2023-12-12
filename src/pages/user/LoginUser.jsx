@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import Logo from '../../assets/logo.svg';
-import { MdOutlineEmail, MdLock } from 'react-icons/md';
+import { MdOutlineEmail, MdPerson } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 const LoginUser = () => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [department, setDepartment] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    sessionStorage.setItem('email', email);
+    sessionStorage.setItem('department', department);
     navigate('/select-user');
   };
 
@@ -38,21 +40,30 @@ const LoginUser = () => {
           }}
         />
         <TextField
+          select
           className="w-full"
-          label="Password"
+          label="Department"
           variant="outlined"
           size="large"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={department}
+          onChange={(e) => setDepartment(e.target.value)}
           InputProps={{
             startAdornment: (
-              <MdLock className="text-[#253A59] mr-4 text-[24px]" />
+              <MdPerson className="text-[#253A59] mr-4 text-[24px]" />
             ),
           }}
-        />
+          SelectProps={{
+            native: true,
+          }}
+        >
+          <option value="" disabled>
+            Select Department
+          </option>
+          <option value="Bisnis dan Hospitality">Bisnis dan Hospitality</option>
+          <option value="Industri Kreatif dan Digital">Industri Kreatif dan Digital</option>
+        </TextField>
         <Button
-         style={{ backgroundColor: '#EDAA2D', '&:hover': { backgroundColor: '#D29100' }, color: '#000' }}
+          style={{ backgroundColor: '#EDAA2D', '&:hover': { backgroundColor: '#D29100' }, color: '#000' }}
           type="submit"
           variant="contained"
           color="primary"

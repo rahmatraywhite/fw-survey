@@ -10,19 +10,17 @@ const SurveyUser = () => {
     const navigate = useNavigate();
     const handleSubmit = (e) => {
         e.preventDefault();
+        sessionStorage.setItem('jawabanPertanyaan1', jawabanPertanyaan1);
+        sessionStorage.setItem('jawabanPertanyaan2', jawabanPertanyaan2);
+        sessionStorage.setItem('jawabanPertanyaan3', jawabanPertanyaan3);
+        sessionStorage.setItem('kritikSaran', kritikSaran);
         navigate('/penilaian-user');
-        console.log({
-            jawabanPertanyaan1,
-            jawabanPertanyaan2,
-            jawabanPertanyaan3,
-            kritikSaran,
-        });
 
         setJawabanPertanyaan1(0);
         setJawabanPertanyaan2(0);
         setJawabanPertanyaan3(0);
         setKritikSaran('');
-    };
+      };
 
     return (
         <main className="flex flex-col">
@@ -109,10 +107,9 @@ const SurveyUser = () => {
                             value={kritikSaran}
                             onChange={(e) => setKritikSaran(e.target.value)}
                             rows="4"
-                            className="block w-full mt-1"
+                            className="block p-2 w-full mt-1"
                         ></textarea>
                     </div>
-
                     <button
                         type="submit"
                         className="bg-[#EDAA2D] text-[#000] w-full font-medium text-xl py-2 px-6 rounded-md hover:bg-[#D29100] focus:outline-none focus:shadow-outline"

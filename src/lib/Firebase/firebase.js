@@ -2,13 +2,12 @@ import firebase from "firebase/compat/app"
 import "firebase/compat/firestore"
 
 const app = {
-  apiKey: "AIzaSyBtScTkMCxN884h6FUbq-CU8QPkuo29QK0",
-  authDomain: "apk-survey.firebaseapp.com",
-  projectId: "apk-survey",
-  storageBucket: "apk-survey.appspot.com",
-  messagingSenderId: "727708435852",
-  appId: "1:727708435852:web:ccf6f2ca29bcdb593ec2a9",
-  measurementId: "G-PL6TTR95MX"
+    apiKey: "AIzaSyA4DAW5b3i2Er8zinbj9V8PooHXCXtZsdg",
+    authDomain: "survey-app-c1556.firebaseapp.com",
+    projectId: "survey-app-c1556",
+    storageBucket: "survey-app-c1556.appspot.com",
+    messagingSenderId: "338384805202",
+    appId: "1:338384805202:web:4ae81491bc2d18463fae8b"
 };
 
 
