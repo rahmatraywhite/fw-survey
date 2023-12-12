@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { FaEdit, FaTrash, FaSave } from 'react-icons/fa';
 
 const Pertanyaan = ({ id, question, onEdit, onDelete }) => {
@@ -17,7 +18,6 @@ const Pertanyaan = ({ id, question, onEdit, onDelete }) => {
     const handleDelete = () => {
         onDelete(id);
     };
-
 
     return (
         <div className='rounded-md my-2'>
@@ -56,15 +56,29 @@ const Pertanyaan = ({ id, question, onEdit, onDelete }) => {
 };
 
 const PertanyaanPage = () => {
-    const [pertanyaanList, setPertanyaanList] = useState([
-        { id: 1, question: 'Kemampuan menjelaskan keterkaitan bidang, topik yang diajarkan dengan bidang, topik lain dan dengan konteks kehidupan' },
-        { id: 2, question: 'Kemampuan menjelaskan keterkaitan bidang, topik yang diajarkan dengan bidang, topik lain dan dengan konteks kehidupan' },
-        { id: 3, question: 'Kemampuan menjelaskan keterkaitan bidang, topik yang diajarkan dengan bidang, topik lain dan dengan konteks kehidupan' },
-        { id: 4, question: 'Kemampuan menjelaskan keterkaitan bidang, topik yang diajarkan dengan bidang, topik lain dan dengan konteks kehidupan' },
-        { id: 5, question: 'Kemampuan menjelaskan keterkaitan bidang, topik yang diajarkan dengan bidang, topik lain dan dengan konteks kehidupan' },
-        { id: 6, question: 'Kemampuan menjelaskan keterkaitan bidang, topik yang diajarkan dengan bidang, topik lain dan dengan konteks kehidupan' },
-        { id: 7, question: 'Kemampuan menjelaskan keterkaitan bidang, topik yang diajarkan dengan bidang, topik lain dan dengan konteks kehidupan' },
-    ]);
+    const [pertanyaanList, setPertanyaanList] = useState([]);
+    const [totalPertanyaan, setTotalPertanyaan] = useState(0);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('https://besmartindonesiagemilang.com/rest-api-survey/data.php');
+                const surveyData = response.data;
+
+                const pertanyaanFromReview = surveyData.map((item, index) => ({
+                    id: index + 1,
+                    question: item.review,
+                }));
+
+                setPertanyaanList(pertanyaanFromReview);
+                setTotalPertanyaan(pertanyaanFromReview.length);
+            } catch (error) {
+                console.error('Error fetching survey data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const handleEditQuestion = (id, editedQuestion) => {
         const updatedPertanyaanList = pertanyaanList.map((item) =>
@@ -76,6 +90,7 @@ const PertanyaanPage = () => {
     const handleDeleteQuestion = (id) => {
         const updatedPertanyaanList = pertanyaanList.filter((item) => item.id !== id);
         setPertanyaanList(updatedPertanyaanList);
+        setTotalPertanyaan((prevTotal) => prevTotal - 1);
     };
 
     const handleSubmit = () => {
@@ -95,15 +110,16 @@ const PertanyaanPage = () => {
                     />
                 ))}
             </div>
-            <button
-                onClick={handleSubmit}
-                className='bg-[#EDAA2D] text-white w-[120px] py-2 px-3 rounded-md'
-            >
-                Submit
-            </button>
+            <div className='flex justify-between items-center'>
+                <button
+                    onClick={handleSubmit}
+                    className='bg-[#EDAA2D] text-white w-[120px] py-2 px-3 rounded-md'
+                >
+                    Submit
+                </button>
+                <div className='text-white'>Total Pertanyaan: {totalPertanyaan}</div>
+            </div>
         </div>
-
-
     );
 };
 

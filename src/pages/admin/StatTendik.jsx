@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper';
 import Pagination from '@mui/material/Pagination';
 
 const fetchData = async () => {
-    const response = await axios.get('https://mocki.io/v1/300fe87a-c1a2-4db8-9c96-e132da4f42d7');
+    const response = await axios.get('https://besmartindonesiagemilang.com/rest-api-survey/data.php');
     return response;
 };
 
@@ -23,9 +23,10 @@ const StatTendik = () => {
     useEffect(() => {
         const fetchDataAsync = async () => {
             const result = await fetchData();
-            setData(result.data);
+            const tendikData = result.data.filter((row) => row.role.toLowerCase() === 'tendik');
+            setData(tendikData);
 
-            const totalItems = result.data.length;
+            const totalItems = tendikData.length;
             const perPage = 10;
             const calculatedTotalPages = Math.ceil(totalItems / perPage);
             setTotalPages(calculatedTotalPages);
@@ -46,7 +47,7 @@ const StatTendik = () => {
     return (
         <div className='flex flex-col items-start h-full'>
             <h1 className="text-2xl text-left font-bold">Laporan Masuk</h1>
-            <TableContainer component={Paper} className="my-4">
+            <TableContainer sx={{ width: '100%' }} component={Paper} className="my-4">
                 <Table>
                     <TableHead>
                         <TableRow className='bg-gray-200' style={{ position: 'sticky', top: 0, zIndex: 1 }}>
@@ -60,9 +61,9 @@ const StatTendik = () => {
                         {data.slice(startIndex, endIndex + 1).map((row) => (
                             <TableRow key={row.id}>
                                 <TableCell>{row.email}</TableCell>
-                                <TableCell>{row.status}</TableCell>
-                                <TableCell>{row.department}</TableCell>
-                                <TableCell>{row.tanggal}</TableCell>
+                                <TableCell className='capitalize'>{row.role}</TableCell>
+                                <TableCell className='capitalize'>{row.departement}</TableCell>
+                                <TableCell>{row.created}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
@@ -79,3 +80,4 @@ const StatTendik = () => {
 };
 
 export default StatTendik;
+

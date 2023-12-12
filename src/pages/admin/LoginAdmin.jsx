@@ -9,17 +9,63 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { MdAccountCircle, MdLock } from 'react-icons/md';
+import Swal from 'sweetalert2';
 
 const LoginAdmin = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate('/dashboard');
+
+    try {
+      // Endpoint untuk login
+      const apiEndpoint = 'https://besmartindonesiagemilang.com/rest-api-survey/login.php';
+
+      // Mengirim permintaan POST ke server dengan menggunakan fetch
+      const response = await fetch(apiEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
+
+      // Jika respon dari server berhasil (status OK)
+      if (response.ok) {
+        console.log('Login successful');
+        // Mengambil data dari respon JSON
+        const data = await response.json();
+
+        // Melakukan navigasi ke halaman dashboard
+        navigate('/dashboard');
+      } else {
+        // Jika respon dari server tidak berhasil, ambil data error dari respon JSON
+        const responseData = await response.json();
+
+        // Jika error adalah 'User not found', tampilkan pesan kesalahan menggunakan Swal (SweetAlert)
+        if (responseData.error === 'User not found') {
+          Swal.fire({
+            icon: 'error',
+            title: 'Email Tidak Terdaftar',
+            text: 'Email yang Anda berikan tidak terdaftar.',
+          });
+        } else {
+          // Jika error bukan 'User not found', lemparkan error untuk ditangkap oleh blok catch
+          throw new Error(`Gagal login. Status: ${response.status}`);
+        }
+      }
+    } catch (error) {
+      // Tangkap dan log error yang terjadi
+      console.error('Error saat login:', error);
+    }
   };
+
 
   const handleRememberMeChange = () => {
     setRememberMe(!rememberMe);
@@ -36,12 +82,12 @@ const LoginAdmin = () => {
       >
         <h1 className="text-center text-[30px] uppercase font-bold">Login</h1>
         <TextField
-          label="Username"
+          label="email"
           variant="outlined"
           fullWidth
           size="large"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           className="mb-4"
           InputProps={{
             startAdornment: (

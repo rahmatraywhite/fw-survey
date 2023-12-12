@@ -1,18 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
-import React from 'react'
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-
+import React, { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
-import faker from 'faker';
+import axios from 'axios';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 
 ChartJS.register(
   CategoryScale,
@@ -33,32 +23,103 @@ export const options = {
   },
 };
 
-const labels = ['Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November'];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Dosen',
-      data: [12, 4, 20, 15, 50, 30],
-      borderColor: '#96EFFF',
-      backgroundColor: '#96EFFF',
-    },
-    {
-      label: 'Mahasiswa',
-      data: [0, 12, 38, 30, 32, 25],
-      borderColor: '#5FBDFF',
-      backgroundColor: '#5FBDFF',
-    },
-    {
-      label: 'Tendik',
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 50 })),
-      borderColor: '#7B66FF',
-      backgroundColor: '#7B66FF',
-    },
-  ],
-};
 const StatistikData = () => {
+  const [data, setData] = useState({
+    labels: [],
+    datasets: [
+      {
+        label: 'Dosen',
+        data: ['jakarta'],
+        borderColor: '#96EFFF',
+        backgroundColor: '#96EFFF',
+      },
+      {
+        label: 'Mahasiswa',
+        data: [],
+        borderColor: '#5FBDFF',
+        backgroundColor: '#5FBDFF',
+      },
+      {
+        label: 'Tendik',
+        data: [],
+        borderColor: '#7B66FF',
+        backgroundColor: '#7B66FF',
+      },
+    ],
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://besmartindonesiagemilang.com/rest-api-survey/data.php');
+        const surveyData = response.data;
+
+        const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+        const updatedData = {
+          labels: months,
+          datasets: [
+            {
+              label: 'Dosen',
+              data: months.map((month, index) => {
+                const roleData = surveyData.filter((item) => {
+                  const createdMonth = new Date(item.created).getMonth();
+                  return createdMonth === index && item.role === 'dosen';
+                });
+                const averageRating = roleData.length > 0 ? roleData.reduce((acc, item) => {
+                  acc += (item.question1 + item.question2 + item.question3) / 3;
+                  return acc;
+                }, 0) / roleData.length : 0;
+                return averageRating;
+              }),
+              borderColor: '#96EFFF',
+              backgroundColor: '#96EFFF',
+            },
+            {
+              label: 'Mahasiswa',
+              data: months.map((month, index) => {
+                const roleData = surveyData.filter((item) => {
+                  const createdMonth = new Date(item.created).getMonth();
+                  return createdMonth === index && item.role === 'mahasiswa';
+                });
+                const averageRating = roleData.length > 0 ? roleData.reduce((acc, item) => {
+                  acc += (item.question1 + item.question2 + item.question3) / 3;
+                  return acc;
+                }, 0) / roleData.length : 0;
+                return averageRating;
+              }),
+              borderColor: '#5FBDFF',
+              backgroundColor: '#5FBDFF',
+            },
+            {
+              label: 'Tendik',
+              data: months.map((month, index) => {
+                const roleData = surveyData.filter((item) => {
+                  const createdMonth = new Date(item.created).getMonth();
+                  return createdMonth === index && item.role === 'tendik';
+                });
+                const averageRating = roleData.length > 0 ? roleData.reduce((acc, item) => {
+                  acc += (item.question1 + item.question2 + item.question3) / 3;
+                  return acc;
+                }, 0) / roleData.length : 0;
+                return averageRating;
+              }),
+              borderColor: '#7B66FF',
+              backgroundColor: '#7B66FF',
+            }
+          ],
+        };
+
+        setData(updatedData);
+      } catch (error) {
+        console.error('Error fetching survey data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
   return (
     <div className="w-full max-w-screen-lg m-auto">
       <div className='flex flex-col space-y-8 justify-center'>
@@ -71,4 +132,4 @@ const StatistikData = () => {
   )
 }
 
-export default StatistikData
+export default StatistikData;

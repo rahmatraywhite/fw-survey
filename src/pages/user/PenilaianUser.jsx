@@ -3,7 +3,8 @@ import Navbar from '../../components/Navbar';
 import { FaStar } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import axios from 'axios';
-
+import { format } from 'date-fns';
+import enUSLocale from 'date-fns/locale/en-US';
 const PenilaianUser = () => {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState('');
@@ -21,7 +22,8 @@ const PenilaianUser = () => {
 
     try {
       setLoading(true);
-
+      const currentDate = new Date();
+      const formattedDate = format(currentDate, 'yyyy-MM-dd', { locale: enUSLocale });
       const apiEndpoint = 'https://besmartindonesiagemilang.com/rest-api-survey/insert.php';
       const response = await axios.post(apiEndpoint, {
         email: email,
@@ -32,11 +34,9 @@ const PenilaianUser = () => {
         rating: rating,
         review: review,
         role: role,
-        created: '2012-12-12',
+        created: formattedDate,
         suggestion: suggestion,
       });
-
-      console.log(response.data);
 
       if (response.status === 200) {
         sessionStorage.clear();

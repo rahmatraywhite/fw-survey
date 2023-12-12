@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper';
 import Pagination from '@mui/material/Pagination';
 
 const fetchData = async () => {
-    const response = await axios.get('https://mocki.io/v1/f9627aa0-aa84-41e7-9b81-d0b027b22c3d');
+    const response = await axios.get('https://besmartindonesiagemilang.com/rest-api-survey/data.php');
     return response;
 };
 
@@ -23,9 +23,10 @@ const StatDosen = () => {
     useEffect(() => {
         const fetchDataAsync = async () => {
             const result = await fetchData();
-            setData(result.data);
+            const dosenData = result.data.filter((row) => row.role.toLowerCase() === 'dosen');
+            setData(dosenData);
 
-            const totalItems = result.data.length;
+            const totalItems = dosenData.length;
             const perPage = 10;
             const calculatedTotalPages = Math.ceil(totalItems / perPage);
             setTotalPages(calculatedTotalPages);
@@ -46,7 +47,7 @@ const StatDosen = () => {
     return (
         <div className='flex flex-col items-start h-full'>
             <h1 className="text-2xl text-left font-bold">Laporan Masuk</h1>
-            <TableContainer component={Paper} className="my-4">
+            <TableContainer sx={{ width: '100%' }} component={Paper} className="my-4">
                 <Table>
                     <TableHead>
                         <TableRow className='bg-gray-200' style={{ position: 'sticky', top: 0, zIndex: 1 }}>
@@ -60,9 +61,9 @@ const StatDosen = () => {
                         {data.slice(startIndex, endIndex + 1).map((row) => (
                             <TableRow key={row.id}>
                                 <TableCell>{row.email}</TableCell>
-                                <TableCell>{row.status}</TableCell>
-                                <TableCell>{row.department}</TableCell>
-                                <TableCell>{row.tanggal}</TableCell>
+                                <TableCell className='capitalize'>{row.role}</TableCell>
+                                <TableCell className='capitalize'>{row.departement}</TableCell>
+                                <TableCell>{row.created}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
@@ -79,3 +80,4 @@ const StatDosen = () => {
 };
 
 export default StatDosen;
+

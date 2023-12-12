@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper';
 import Pagination from '@mui/material/Pagination';
 
 const fetchData = async () => {
-    const response = await axios.get('https://mocki.io/v1/6041a4b5-be8c-4480-a2c3-9cc998f03fb4');
+    const response = await axios.get('https://besmartindonesiagemilang.com/rest-api-survey/data.php');
     return response;
 };
 
@@ -23,9 +23,10 @@ const StatMahasiswa = () => {
     useEffect(() => {
         const fetchDataAsync = async () => {
             const result = await fetchData();
-            setData(result.data);
+            const mahasiswaData = result.data.filter((row) => row.role.toLowerCase() === 'mahasiswa');
+            setData(mahasiswaData);
 
-            const totalItems = result.data.length;
+            const totalItems = mahasiswaData.length;
             const perPage = 10;
             const calculatedTotalPages = Math.ceil(totalItems / perPage);
             setTotalPages(calculatedTotalPages);
@@ -60,9 +61,9 @@ const StatMahasiswa = () => {
                         {data.slice(startIndex, endIndex + 1).map((row) => (
                             <TableRow key={row.id}>
                                 <TableCell>{row.email}</TableCell>
-                                <TableCell>{row.status}</TableCell>
-                                <TableCell>{row.department}</TableCell>
-                                <TableCell>{row.tanggal}</TableCell>
+                                <TableCell className='capitalize'>{row.role}</TableCell>
+                                <TableCell className='capitalize'>{row.departement}</TableCell>
+                                <TableCell>{row.created}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
@@ -79,3 +80,4 @@ const StatMahasiswa = () => {
 };
 
 export default StatMahasiswa;
+

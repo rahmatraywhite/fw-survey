@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import CardPenilaian from '../../components/CardPenilaian';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-import { db } from '../../lib/Firebase/firebase';
+import axios from 'axios';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -36,11 +36,11 @@ const Penilaian = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const snapshot = await db.collection('surveys').get();
-        const surveyData = snapshot.docs.map((doc) => doc.data());
+        const response = await axios.get('https://besmartindonesiagemilang.com/rest-api-survey/data.php');
+        const surveyData = response.data;
 
         const newData = surveyData.map((item) => ({
-          nama: item.email, 
+          nama: item.email,
           penilaian: item.rating,
           saran: item.suggestion,
         }));
@@ -68,7 +68,7 @@ const Penilaian = () => {
     };
 
     fetchData();
-  }, [chartData]); 
+  }, []);
 
   return (
     <div className="flex flex-column h-full">
