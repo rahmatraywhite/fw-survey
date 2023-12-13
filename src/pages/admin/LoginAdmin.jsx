@@ -17,52 +17,18 @@ const LoginAdmin = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-
-    try {
-      // Endpoint untuk login
-      const apiEndpoint = 'https://besmartindonesiagemilang.com/rest-api-survey/login.php';
-
-      // Mengirim permintaan POST ke server dengan menggunakan fetch
-      const response = await fetch(apiEndpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
+    if (email === 'admin' && password === 'admin') {
+      navigate('/dashboard');
+    } else if (email === 'su-admin' && password === 'su-admin') {
+      navigate('/super-admin');
+    } else {
+      Swal.fire({
+        title: 'Error',
+        text: 'Invalid email or password',
+        icon: 'error',
       });
-
-      // Jika respon dari server berhasil (status OK)
-      if (response.ok) {
-        console.log('Login successful');
-        // Mengambil data dari respon JSON
-        const data = await response.json();
-
-        // Melakukan navigasi ke halaman dashboard
-        navigate('/dashboard');
-      } else {
-        // Jika respon dari server tidak berhasil, ambil data error dari respon JSON
-        const responseData = await response.json();
-
-        // Jika error adalah 'User not found', tampilkan pesan kesalahan menggunakan Swal (SweetAlert)
-        if (responseData.error === 'User not found') {
-          Swal.fire({
-            icon: 'error',
-            title: 'Email Tidak Terdaftar',
-            text: 'Email yang Anda berikan tidak terdaftar.',
-          });
-        } else {
-          // Jika error bukan 'User not found', lemparkan error untuk ditangkap oleh blok catch
-          throw new Error(`Gagal login. Status: ${response.status}`);
-        }
-      }
-    } catch (error) {
-      // Tangkap dan log error yang terjadi
-      console.error('Error saat login:', error);
     }
   };
 
@@ -77,7 +43,7 @@ const LoginAdmin = () => {
         <img className="w-[321px]" src={Logo} alt="Vokasi UB" />
       </div>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleLogin}
         className="bg-white flex space-y-4 flex-col justify-center shadow-md mt-5 w-[350px] md:w-[728px] rounded px-8 py-10"
       >
         <h1 className="text-center text-[30px] uppercase font-bold">Login</h1>

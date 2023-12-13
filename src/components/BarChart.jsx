@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -9,7 +9,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { db } from '../lib/Firebase/firebase';
+import axios from 'axios';
 
 ChartJS.register(
   CategoryScale,
@@ -20,17 +20,14 @@ ChartJS.register(
   Legend
 );
 
-const labels = ['January', 'February', 'March', 'April', 'May'];
-
-
 const BarChart = () => {
   const [surveyData, setSurveyData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const snapshot = await db.collection('surveys').get();
-        const data = snapshot.docs.map((doc) => doc.data());
+        const response = await axios.get('https://besmartindonesiagemilang.com/rest-api-survey/data.php');
+        const data = response.data;
         setSurveyData(data);
       } catch (error) {
         console.error('Error fetching survey data:', error);
@@ -40,18 +37,47 @@ const BarChart = () => {
     fetchData();
   }, []);
 
-  const roleCounts = surveyData.reduce((acc, survey) => {
-    const role = survey.role.toLowerCase();
-    acc[role] = (acc[role] || 0) + 1;
-    return acc;
-  }, {});
+  const convertMonthToString = (month) => {
+    const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+    return monthNames[month];
+  };
 
-  const labels = Object.keys(roleCounts);
-  const datasets = labels.map((label) => ({
-    label: label.charAt(0).toUpperCase() + label.slice(1),
-    data: Array(5).fill(roleCounts[label] || 0),
-    backgroundColor: getBackgroundColor(label),
-  }));
+  const getCountsByRoleAndMonth = (role) => {
+    const countsByMonth = {};
+    surveyData
+      .filter((survey) => survey.role.toLowerCase() === role)
+      .forEach((survey) => {
+        const month = new Date(survey.created).getMonth();
+        const monthName = convertMonthToString(month);
+        countsByMonth[monthName] = (countsByMonth[monthName] || 0) + 1;
+      });
+
+    return countsByMonth;
+  };
+
+  const labels = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+  const countsByMonthDosen = getCountsByRoleAndMonth('dosen');
+  const countsByMonthMahasiswa = getCountsByRoleAndMonth('mahasiswa');
+  const countsByMonthTendik = getCountsByRoleAndMonth('tendik');
+
+  const datasets = [
+    {
+      label: 'Dosen',
+      data: labels.map((month) => countsByMonthDosen[month] || 0),
+      backgroundColor: getBackgroundColor('dosen'),
+    },
+    {
+      label: 'Mahasiswa',
+      data: labels.map((month) => countsByMonthMahasiswa[month] || 0),
+      backgroundColor: getBackgroundColor('mahasiswa'),
+    },
+    {
+      label: 'Tendik',
+      data: labels.map((month) => countsByMonthTendik[month] || 0),
+      backgroundColor: getBackgroundColor('tendik'),
+    },
+  ];
 
   const data = { labels, datasets };
 
@@ -65,7 +91,6 @@ const BarChart = () => {
 
   return <Bar options={options} data={data} />;
 };
-
 
 const getBackgroundColor = (role) => {
   switch (role) {
