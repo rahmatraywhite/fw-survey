@@ -4,10 +4,12 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import BarChart from '../../components/BarChart';
 import axios from 'axios';
+import { useAuthentication } from '../../hooks/useAuthentication';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Dashboard = () => {
+    useAuthentication();
     const [surveyData, setSurveyData] = useState([]);
 
     useEffect(() => {

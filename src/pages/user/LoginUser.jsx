@@ -8,10 +8,20 @@ import Button from '@mui/material/Button';
 const LoginUser = () => {
   const [email, setEmail] = useState('');
   const [department, setDepartment] = useState('');
+  const [emailError, setEmailError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setEmailError('Please enter a valid email address');
+      return;
+    }
+
+    setEmailError('');
+
     sessionStorage.setItem('email', email);
     sessionStorage.setItem('department', department);
     navigate('/select-user');
@@ -33,6 +43,8 @@ const LoginUser = () => {
           size="large"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          error={!!emailError}
+          helperText={emailError}
           InputProps={{
             startAdornment: (
               <MdOutlineEmail className="text-[#253A59] mr-4 text-[24px]" />

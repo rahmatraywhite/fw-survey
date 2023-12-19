@@ -9,6 +9,7 @@ const SurveyUser = () => {
   const [jawabanPertanyaan2, setJawabanPertanyaan2] = useState(0);
   const [jawabanPertanyaan3, setJawabanPertanyaan3] = useState(0);
   const [kritikSaran, setKritikSaran] = useState('');
+  const [formError, setFormError] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,6 +29,23 @@ const SurveyUser = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Validasi formulir
+    const errors = {};
+    if (jawabanPertanyaan1 === 0 || jawabanPertanyaan2 === 0 || jawabanPertanyaan3 === 0) {
+      errors.form = 'Isi Semua Survey';
+    }
+    if (!kritikSaran.trim()) {
+      errors.kritikSaran = 'Isi Kritik dan Saran Anda';
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFormError(errors);
+      return;
+    }
+
+    setFormError({});
+
     sessionStorage.setItem('jawabanPertanyaan1', jawabanPertanyaan1);
     sessionStorage.setItem('jawabanPertanyaan2', jawabanPertanyaan2);
     sessionStorage.setItem('jawabanPertanyaan3', jawabanPertanyaan3);
@@ -49,6 +67,9 @@ const SurveyUser = () => {
           Isilah survey kepuasan dibawah ini terhadap layanan dan fasilitas yang ada di Fakultas Vokasi Universitas Brawijaya.
         </p>
         <form onSubmit={handleSubmit} className="mb-6">
+        {formError.form && (
+            <p className="text-red-500 text-center text-sm mb-2">{formError.form}</p>
+          )}
           {pertanyaanList.map((pertanyaan, index) => (
             <div key={index} className="mb-6">
               <label className="block text-base text-center md:text-left font-semibold text-[#000]">
@@ -83,9 +104,13 @@ const SurveyUser = () => {
               value={kritikSaran}
               onChange={(e) => setKritikSaran(e.target.value)}
               rows="4"
-              className="block p-2 w-full mt-1"
+              className={`block p-2 w-full mt-1 ${formError.kritikSaran ? 'border-red-500' : ''}`}
             ></textarea>
+            {formError.kritikSaran && (
+              <p className="text-red-500 text-center text-sm mt-1">{formError.kritikSaran}</p>
+            )}
           </div>
+         
           <button
             type="submit"
             className="bg-[#EDAA2D] text-[#000] w-full font-medium text-xl py-2 px-6 rounded-md hover:bg-[#D29100] focus:outline-none focus:shadow-outline"

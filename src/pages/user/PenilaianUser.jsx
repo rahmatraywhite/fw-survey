@@ -5,20 +5,32 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import { format } from 'date-fns';
 import enUSLocale from 'date-fns/locale/en-US';
+
 const PenilaianUser = () => {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState('');
-  const email = sessionStorage.getItem('email');
-  const role = sessionStorage.getItem('role');
-  const departement = sessionStorage.getItem('department');
-  const question1 = sessionStorage.getItem('jawabanPertanyaan1');
-  const question2 = sessionStorage.getItem('jawabanPertanyaan2');
-  const question3 = sessionStorage.getItem('jawabanPertanyaan3');
-  const suggestion = sessionStorage.getItem('kritikSaran');
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (rating === 0) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Berikan penilaian terlebih dahulu!',
+        icon: 'error',
+      });
+      return;
+    }
+
+    if (review.trim() === '') {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Isi review Anda sebelum mengirimkan survey!',
+        icon: 'error',
+      });
+      return;
+    }
 
     try {
       setLoading(true);
@@ -26,16 +38,16 @@ const PenilaianUser = () => {
       const formattedDate = format(currentDate, 'yyyy-MM-dd', { locale: enUSLocale });
       const apiEndpoint = 'https://besmartindonesiagemilang.com/rest-api-survey/insert.php';
       const response = await axios.post(apiEndpoint, {
-        email: email,
-        departement: departement,
-        question1: question1,
-        question2: question2,
-        question3: question3,
+        email: sessionStorage.getItem('email'),
+        departement: sessionStorage.getItem('department'),
+        question1: sessionStorage.getItem('jawabanPertanyaan1'),
+        question2: sessionStorage.getItem('jawabanPertanyaan2'),
+        question3: sessionStorage.getItem('jawabanPertanyaan3'),
         rating: rating,
         review: review,
-        role: role,
+        role: sessionStorage.getItem('role'),
         created: formattedDate,
-        suggestion: suggestion,
+        suggestion: sessionStorage.getItem('kritikSaran'),
       });
 
       if (response.status === 200) {
