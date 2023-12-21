@@ -56,7 +56,9 @@ const PenilaianUser = () => {
           title: 'Success!',
           text: 'Thank you for your feedback!',
           icon: 'success',
-        });
+        }).then(() => {
+          window.location.href = '/';
+        })
       } else {
         throw new Error(`Failed to submit survey. Status: ${response.status}`);
       }
